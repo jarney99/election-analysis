@@ -30,6 +30,7 @@ winning_percentage = 0
 counties_turnout = ""
 votes_turnout = 0
 turnout_percentage = 0 
+
 # Read the csv and convert it into a list of dictionaries
 with open(file_to_load) as election_data:
     reader = csv.reader(election_data)
@@ -94,22 +95,22 @@ with open(file_to_save, "w") as txt_file:
     # 6a: Write a for loop to get the county from the county dictionary.
     for counties_name in counties_votes:
         # 6b: Retrieve the county vote count.
-        votes = counties_votes[counties_name]
+        votes_total = counties_votes[counties_name]
         # 6c: Calculate the percentage of votes for the county.
-        percentage_vote = float(counties_votes) / float(total_votes) * 100
+        percentage_vote = float(votes_total) / float(total_votes) * 100
 
          # 6d: Print the county results to the terminal.
         counties_results_summary = (
-            f"{counties_name}: {percentage_vote:.1f}% ({votes:,})\n")
+            f"{counties_name}: {percentage_vote:.1f}% ({votes_total:,})\n")
         print(counties_results_summary)
         
          # 6e: Save the county votes to a text file.
         txt_file.write(counties_results_summary)
          # 6f: Write an if statement to determine the winning county and get its vote count.
-        if (votes > votes_turnout) and (percentage_vote > turnout_percentage):
+        if (votes_total > votes_turnout) and (percentage_vote > turnout_percentage):
 
     # 7: Print the county with the largest turnout to the terminal.
-            votes_turnout = votes
+            votes_turnout = votes_total
             counties_turnout = counties_name
             turnout_percentage = percentage_vote
 
